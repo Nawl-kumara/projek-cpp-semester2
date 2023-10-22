@@ -1,0 +1,295 @@
+#include <iostream>
+#include <conio.h>
+#include <windows.h>
+using namespace std;
+
+struct ecek {
+    string kdbr;
+    string nmb;
+    int stkbrg;
+    float hrga;
+	char dt;
+};
+ecek cek[5];
+int i;
+struct alif {
+	int dskn, byr, kmbl;
+    int jmlh;
+    double tot;
+	int subttl, totalPembelian;
+};
+alif lif[4];
+
+void gotoxy(int x, int y)
+{
+HANDLE hConsoleOutput;
+COORD dwCursorPosition;
+dwCursorPosition.X = x;
+dwCursorPosition.Y = y;
+hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+SetConsoleCursorPosition(hConsoleOutput,dwCursorPosition);
+}
+
+void intro(){
+	gotoxy(30,1);cout<<"*******************************************************************";
+	gotoxy(30,2);cout<<"|";			gotoxy(96,2);cout<<"|";
+	gotoxy(30,3);cout<<"|";			gotoxy(96,3);cout<<"|";
+	gotoxy(38,4);cout<<"SELAMAT DATANG DI PROGRAM PENYEWAAAN MOBIL.";
+	gotoxy(30,4);cout<<"|";			gotoxy(96,4);cout<<"|";
+	gotoxy(30,5);cout<<"|";			gotoxy(96,5);cout<<"|";
+	gotoxy(30,6);cout<<"|";			gotoxy(96,6);cout<<"|";
+	gotoxy(30,7);cout<<"|";			gotoxy(96,7);cout<<"|";
+	gotoxy(30,8);cout<<"*******************************************************************";
+}
+
+void z(){
+
+gotoxy(40,0);cout << "Menu:" << endl;
+gotoxy(30,2);cout << "1. inputan data unit mobil " << endl;
+gotoxy(30,3);cout << "2. menampilkan data unit dalam bentuk urut" << endl;
+gotoxy(30,4);cout << "3. proses transaksi" << endl;
+gotoxy(30,5);cout << "4. exit" << endl;
+}
+
+void jim(int k) {
+	for(int i = 0; i < k; ++i) {
+    gotoxy(3, 4+i); cout << cek[i].kdbr;
+    gotoxy(12, 4+i); cout << cek[i].nmb;
+    gotoxy(25, 4+i); cout << cek[i].stkbrg;
+    gotoxy(38, 4+i); cout << cek[i].hrga;
+    
+}
+gotoxy(60, 1);cout<<"klik arah bawah untuk memilih menu lagi..";
+getch();
+
+}
+
+void ba(int k) {
+    for (int i = 0; i < k; i++)
+    {
+        gotoxy(5, 1);cout << "No." << endl;
+        gotoxy(5, 2+i); cout << i + 1;
+        gotoxy(11, 1); cout << "Kode Mobil  " << endl;
+        gotoxy(11, 2+i); cin >> cek[i].kdbr;
+        gotoxy(25, 1); cout << "Merek mobil " << endl;
+        gotoxy(25, 2+i); cin.ignore();
+        getline(cin, cek[i].nmb);
+        gotoxy(40, 1); cout << "Stok unit  " << endl;
+        gotoxy(40, 2+i); cin >> cek[i].stkbrg;
+        gotoxy(55, 1); cout << "Harga persewa (Rp)  " << endl;
+        gotoxy(55, 2+i); cin >> cek[i].hrga;
+    }
+
+
+
+}
+void kha(int k) {
+
+    for (int i = 0; i < k; i++) {
+        system("cls");
+        gotoxy(1, 0); cout << "+=================================================+"; //data sebelum di urutkan
+        gotoxy(3, 1); cout << "Kode";
+        gotoxy(9, 1);cout<<"|";
+        gotoxy(12, 1); cout << "Merk Mobil ";
+        gotoxy(23, 1);cout<<"|";
+        gotoxy(25, 1); cout << "Stok unit";
+        gotoxy(36, 1);cout<<"|";
+        gotoxy(38, 1); cout << "Harga Persewa ";
+        gotoxy(1, 2); cout << "+=================================================+";
+        jim(k);
+    }
+    
+	
+}
+
+int kho(int k) {
+bool min;
+    for (int i = 0; i < k; ++i) {
+        min = false;
+        for (int j = 0; j < k - i - 1; ++j) {
+            if (cek[j].nmb > cek[j + 1].nmb) {
+                swap(cek[j], cek[j + 1]);
+                min = true;
+            }
+        }
+        
+    }
+}
+
+void dzal() {
+gotoxy(60,1);cout << "data unit mobil setelah di urutkan " << endl;
+gotoxy(60,2);cout << "+========================================================+" << endl;
+gotoxy(60,3);cout << "| Kode. |   Merk mobil    |   stok unit   |   Harga/sewa |" << endl;
+gotoxy(60,4);cout << "+========================================================+" << endl;
+}
+
+void dal(int k) {
+kho(k);
+dzal();
+
+for(int i=0; i<k; ++i) 
+	{
+	gotoxy(62,5+i);cout<<cek[i].kdbr;
+	gotoxy(72,5+i);cout<<cek[i].nmb;
+	gotoxy(94,5+i);cout<<cek[i].stkbrg;
+	gotoxy(106,5+i);cout<<cek[i].hrga;
+
+	}
+}
+
+
+
+void za(int k) {
+int  bykbl;
+int ttl, thrg;
+string cary;
+bool ktm=false;
+zee:
+zyy:
+
+    gotoxy(45, 6); cout << "Masukkan merk mobil yang ingin dicari: ";
+    cin >> cary;
+    system("cls");
+	
+    for (i=0; i<k; i++){ 
+       ktm=true;
+	   if (cek[i].nmb==cary) {
+	dzal();
+    gotoxy(62,5+i);cout<<cek[i].kdbr;
+	gotoxy(72,5+i);cout<<cek[i].nmb;
+	gotoxy(94,5+i);cout<<cek[i].stkbrg;
+	gotoxy(106,5+i);cout<<cek[i].hrga;
+	gotoxy(25, 1); cout << "Berapa unit yang ingin dibeli: ";
+    cin >> bykbl;
+    ttl = cek[i].hrga * bykbl;
+    
+       } 	
+   }
+  
+   if (ktm==false) 
+{
+   gotoxy(45, 7); cout << "Unit tidak ditemukan!" << endl;
+        system("cls");
+        goto zee;
+}
+
+    gotoxy(25, 2); cout << "Ada data lagi? (y/n): ";
+    cin >> cek[i].dt;
+    if (cek[i].dt == 'y' || cek[i].dt == 'Y') {
+        system("cls");
+        goto zyy;
+    }
+    else {
+      goto zy;  
+    }
+ zy:
+system("cls");
+
+	thrg=ttl;
+    gotoxy(25,1);cout << "Total Harga"<<"\t\t\t\t Rp. " << thrg << endl;
+
+if 	(thrg>=100000) 
+    (lif[i].dskn=thrg*0.3);
+    
+else(lif[i].dskn=thrg*0);
+
+    lif[i].tot=thrg-lif[i].dskn;
+    gotoxy(25,0);cout<<"______________________________________*";
+    gotoxy(61,1);cout<<"\t|";
+    gotoxy(25,2);cout<<"anda mendapatkan diskon sebesar  \t|"<<"Rp. "<<lif[i].dskn<<endl;
+    gotoxy(25,3);cout<<"tunai yang harus anda bayar sebesar\t|"<<"Rp. "<<lif[i].tot<<endl;
+    gotoxy(25,4);cout<<"silahkan bayar  "<<"\t\t\t Rp. ";cin>>lif[i].byr;
+    gotoxy(61,4);cout<<"\t|";
+    gotoxy(25,5);cout<<"______________________________________*";
+if 	(lif[i].byr>=lif[i].tot) 
+{
+	lif[i].kmbl=lif[i].byr-lif[i].tot;
+	gotoxy(25,7);cout<<"jumlah kembalian anda sebesar = "<<"\tRp. "<<lif[i].kmbl;
+	
+	gotoxy(25,8);cout<<"klik arah bawah untuk memilih menu lagi..";
+	getch();
+}
+while (lif[i].byr<=lif[i].tot) {
+	gotoxy(25,9);cout<<"Jumlah uang kurang!!! \n";
+	gotoxy(25,10);cout<<"Masukan uangnya lagi \t: ";cin>>lif[i].byr;
+	lif[i].kmbl=lif[i].byr-lif[i].tot;
+	gotoxy(25,11);cout<<"Jumlah kembaliannya \t: "<<"Rp. "<<lif[i].kmbl;
+	
+ 	gotoxy(25,12);cout<<"klik arah bawah untuk memilih menu lagi..";
+
+}   
+	
+	}
+
+
+
+
+struct head {
+
+string nmaa, klse;
+int nime;	
+};
+
+int main() {
+intro();
+head he1;
+gotoxy(30,14);cout<<"Masukan nama lengkap\t: ";getline(cin, he1.nmaa);
+gotoxy(30,15);cout<<"Kelas \t\t\t: ";getline(cin, he1.klse);
+gotoxy(30,16);cout<<"Nim \t\t\t: ";cin>>he1.nime;
+system("cls");
+int piel;
+
+cout<<endl;
+do {
+z();	
+cout<<"silahkan pilih menu di atas : "<<endl;
+cin>>piel;
+system("cls");
+
+switch(piel) {
+	
+case 1:
+int k;
+gotoxy(45,0);cout << "Masukkan banyaknya unit : ";
+cin >> k;
+ba(k);
+gotoxy(30,12);cout<<"klik enter untuk melihat data table..";
+getch();
+system("cls");   
+kha(k);
+system("cls");
+break;
+
+case 2:
+gotoxy(1,2);
+cout<<"berikut data setelah di urutkan..";
+dal(k);
+gotoxy(1, 8);cout<<"klik arah bawah untuk memilih menu lagi..";
+getch();
+system("cls");
+break;	
+	
+case 3:
+za(k);
+system("cls");
+break;	
+	
+case 4:
+system("cls");
+gotoxy(50,0);cout<<"YAH SELESAI....."<<endl;
+
+gotoxy(80,2);cout<<"NAMA LENGKAP \t: "<<he1.nmaa<<endl;		
+gotoxy(80,3);cout<<"KELAS	\t: "<<he1.klse<<endl;
+gotoxy(80,4);cout<<"NIM	\t: "<<he1.nime<<endl;
+break;	
+	
+default:
+cout<<"pilihan tidak ada..";
+break;
+	
+}
+
+}
+while (piel!=4);
+
+}
